@@ -20,15 +20,7 @@ class AuthController extends Controller
                     'name' => 'required',
                     'email' => 'required|email|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                     'password' => 'required',
-                    'role' => 'required|in:employee,hr,admin',
-                ]);
-            }
-            elseif (auth()->user()->role === 'hr') {
-                $request->validate([
-                    'name' => 'required',
-                    'email' => 'required|email|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
-                    'password' => 'required',
-                    'role' => 'required|in:employee',
+                    'role' => 'required|in:hr',
                 ]);
             }
 
@@ -105,6 +97,10 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid credentials or account not approved'], Status::UNAUTHORIZED);
         }
 
+        if(!in_array($user->role,['admin', 'hr'])){
+            return response()->json(['message' => 'Access denied. Only HR and Admin can login.'], Status::FORBIDDEN);
+        }
+
         if (!auth()->attempt($credentials)) {
             return response()->json(['message' => 'Invalid credentials'], Status::UNAUTHORIZED);
         }
@@ -113,6 +109,71 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['access_token' => $token, 'token_type' => 'Bearer'], Status::SUCCESS);
+    }
+
+    public function showAllHRS()
+    {
+        $user = User::where('role', 'hr')->get();
+        return response()->json(['users' => $user ], Status::SUCCESS);
+    }
+
+    public function showHR($id)
+    {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized'], Status::UNAUTHORIZED);
+        }
+
+        $hr = User::where('role', 'hr')->find($id);
+
+        if (!$hr) {
+            return response()->json(['message' => 'HR not found'], Status::NOT_FOUND);
+        }
+
+        return response()->json(['hr' => $hr], Status::SUCCESS);
+    }
+
+    public function updateHR(Request $request, $id)
+    {
+        if(auth()->user()->role !== 'admin')
+        {
+            return response()->json(['message' => 'Unauthorized'], Status::UNAUTHORIZED);
+        }
+
+        $user = User::find($id);
+
+        if(!$user)
+        {
+            return response()->json(['message' => 'HR not found'], Status::NOT_FOUND);
+        }
+
+        $request->validate([
+            'name' => 'sometimes|required',
+            'email' => 'sometimes|required|email|unique:users,email,' . $id,
+            'password' => 'sometimes|required',
+            'role' => 'sometimes|required|in:employee,hr',
+        ]);
+
+        if($request->input('password'))
+        {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->update($request->only(['name', 'email', 'role']));
+
+        return response()->json(['message' => 'HR updated successfully!'], Status::SUCCESS);
+    }
+
+    public function deleteHR($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'HR not found'], Status::NOT_FOUND);
+        }
+
+        $user->delete();
+        return response()->json(['message' => 'HR deleted successfully'], Status::SUCCESS);
+
     }
 
     public function logout(Request $request)

@@ -1,16 +1,16 @@
 {
 	"info": {
-		"_postman_id": "46c2ceeb-5158-40ed-81d6-c651a0ec04eb",
+		"_postman_id": "0ffe0df3-14de-4fc8-9731-7a2d9610482a",
 		"name": "HRMS API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39246056"
+		"_exporter_id": "39251898"
 	},
 	"item": [
 		{
 			"name": "User-endpoints",
 			"item": [
 				{
-					"name": "User Register",
+					"name": "HR Register",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -80,7 +80,7 @@
 					"response": []
 				},
 				{
-					"name": "User Login",
+					"name": "Admin HR Login",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -140,7 +140,7 @@
 					"response": []
 				},
 				{
-					"name": "User Logout",
+					"name": "Admin HR Logout",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -203,7 +203,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/admin/approve-user/7",
+							"raw": "http://127.0.0.1:8000/api/admin/approve-user/7",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -214,8 +214,48 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"auth",
 								"admin",
+								"approve-user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HR Update Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "24|m8K7lzacgVvhurBIyX26HKnyEB1AR4cd2lXxzWmhcf4173a1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/hr/approve-user/7",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hr",
 								"approve-user",
 								"7"
 							]
@@ -273,6 +313,221 @@
 								"api",
 								"auth",
 								"hr-register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show All HRS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26|hhUOxfHuTDxnvnFSs8DqwTclWLZIzlV2NzNePGCx25700f97",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/hrs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"hrs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete HR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26|hhUOxfHuTDxnvnFSs8DqwTclWLZIzlV2NzNePGCx25700f97",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/delete-hr/15",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"delete-hr",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update HR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26|hhUOxfHuTDxnvnFSs8DqwTclWLZIzlV2NzNePGCx25700f97",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "update",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "put",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "updatehrupdate@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "hr",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/update-hr/18",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"update-hr",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Specific HR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "26|hhUOxfHuTDxnvnFSs8DqwTclWLZIzlV2NzNePGCx25700f97",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/show-hr/18",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"show-hr",
+								"18"
 							]
 						}
 					},
