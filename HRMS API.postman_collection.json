@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "4|ROS6d7u1HgVZwTBkjTMFtq0E2prnT5HCloq5s0MH3d080595",
+									"value": "28|ic9Wpg1MlofEwvShGucZV0BEQi1C3uzrXXk47fBj9d800cb6",
 									"type": "string"
 								}
 							]
@@ -45,7 +45,7 @@
 								},
 								{
 									"key": "email",
-									"value": "hr2@gmail.com",
+									"value": "hr2676@gmail.com",
 									"type": "text"
 								},
 								{
@@ -55,13 +55,13 @@
 								},
 								{
 									"key": "role",
-									"value": "hr",
+									"value": "employee",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/register",
+							"raw": "http://127.0.0.1:8000/api/admin/hr-register",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -72,15 +72,15 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"auth",
-								"register"
+								"admin",
+								"hr-register"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Admin HR Login",
+					"name": "Admin-HR-Login",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -140,7 +140,7 @@
 					"response": []
 				},
 				{
-					"name": "Admin HR Logout",
+					"name": "Admin-HR-Logout",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -182,7 +182,7 @@
 					"response": []
 				},
 				{
-					"name": "Admin Update Status",
+					"name": "Admin-Update-User-Status",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -223,7 +223,7 @@
 					"response": []
 				},
 				{
-					"name": "HR Update Status",
+					"name": "H- Update-User- Status",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -264,7 +264,7 @@
 					"response": []
 				},
 				{
-					"name": "HR Self Registration",
+					"name": "HR-Self-Registration",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -300,7 +300,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/hr-register",
+							"raw": "http://127.0.0.1:8000/api/auth/hr-self-register",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -312,14 +312,14 @@
 							"path": [
 								"api",
 								"auth",
-								"hr-register"
+								"hr-self-register"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Show All HRS",
+					"name": "Show-All-HRS",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -329,7 +329,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "26|hhUOxfHuTDxnvnFSs8DqwTclWLZIzlV2NzNePGCx25700f97",
+									"value": "30|O8mgCX1yGoMcBuXK9tDyKMsdDbZzjGf8QNUeqR97111bd8dc",
 									"type": "string"
 								}
 							]
@@ -371,7 +371,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete HR",
+					"name": "Delete-HR",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -417,7 +417,7 @@
 					"response": []
 				},
 				{
-					"name": "Update HR",
+					"name": "Update-HR",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -488,7 +488,7 @@
 					"response": []
 				},
 				{
-					"name": "Specific HR",
+					"name": "Specific-HR",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -591,7 +591,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "6|uQrxMHNKRTcV3RoXeCbMON7CDs368BUXY4iTSpZ8edd02aa8",
+									"value": "26|hhUOxfHuTDxnvnFSs8DqwTclWLZIzlV2NzNePGCx25700f97",
 									"type": "string"
 								}
 							]
@@ -636,7 +636,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "6|uQrxMHNKRTcV3RoXeCbMON7CDs368BUXY4iTSpZ8edd02aa8",
+									"value": "29|Di9qNXme6PpeurEDe6yCAznOukZmuqh269Nz3zHH21452dba",
 									"type": "string"
 								}
 							]
@@ -862,6 +862,237 @@
 								"api",
 								"employees",
 								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PerformanceReview-endpoints",
+			"item": [
+				{
+					"name": "Create - Record",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "29|Di9qNXme6PpeurEDe6yCAznOukZmuqh269Nz3zHH21452dba",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "employee_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "review_date",
+									"value": "2024-08-11",
+									"type": "text"
+								},
+								{
+									"key": "kpi_score",
+									"value": "50.6",
+									"type": "text"
+								},
+								{
+									"key": "feedback",
+									"value": "This is the first feedback for employee 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/performance-reviews",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"performance-reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Specified - Record",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "29|Di9qNXme6PpeurEDe6yCAznOukZmuqh269Nz3zHH21452dba",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/performance-reviews/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"performance-reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All - Records",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "29|Di9qNXme6PpeurEDe6yCAznOukZmuqh269Nz3zHH21452dba",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/performance-reviews",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"performance-reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update - Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						]
+					},
+					"response": []
+				},
+				{
+					"name": "Delete -Record",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "29|Di9qNXme6PpeurEDe6yCAznOukZmuqh269Nz3zHH21452dba",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/performance-reviews/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"performance-reviews",
+								"2"
 							]
 						}
 					},

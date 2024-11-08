@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -19,4 +19,9 @@ class Employee extends Model
         'position',
         'date_of_joining'
     ];
+
+    public function performanceReview()
+    {
+        return $this->hasMany(PerformanceReview::class);
+    }
 }

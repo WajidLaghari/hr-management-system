@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Constants\Status;
-use App\Http\Controllers\Constants\StatusCode;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +19,7 @@ class AuthController extends Controller
                     'name' => 'required',
                     'email' => 'required|email|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                     'password' => 'required',
-                    'role' => 'required|in:hr',
+                    'role' => 'required|in:hr'
                 ]);
             }
 
@@ -34,7 +33,7 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
-            'status' => 'pending',
+            'status' => 'pending'
         ]);
 
         return response()->json(['message' => 'User created successfully!'], Status::SUCCESS);
@@ -46,7 +45,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'password' => 'required',
-            'role' => 'required|in:hr',
+            'role' => 'required|in:hr'
         ]);
 
         $existingUser = User::where('email', $request->input('email'))->first();
@@ -64,7 +63,8 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'HR registered successfully!'], Status::SUCCESS);
     }
-    public function approveUser(Request $request, $id)
+
+    public function updateUserStatus(Request $request, $id)
     {
         if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'hr') {
             return response()->json(['message' => 'Unauthorized'], Status::UNAUTHORIZED);
@@ -76,10 +76,26 @@ class AuthController extends Controller
             return response()->json(['message' => 'User not found'], Status::NOT_FOUND);
         }
 
-        $user->status = 'approved';
+        $newStatus = $request->input('status');
+
+        if (!in_array($newStatus, ['pending', 'approved', 'blocked'])) {
+            return response()->json(['message' => 'Invalid status'], Status::BAD_REQUEST);
+        }
+
+        if ($user->status === $newStatus) {
+            return response()->json(['message' => 'User is already ' . $newStatus], Status::CONFLICT);
+        }
+
+        $user->status = $newStatus;
         $user->save();
 
-        return response()->json(['message' => 'User approved successfully!'], 200);
+        $messages = [
+            'pending' => 'User updated to pending',
+            'approved' => 'User approved',
+            'blocked' => 'User blocked',
+        ];
+
+        return response()->json(['message' => $messages[$newStatus]], 200);
     }
 
     public function login(Request $request)
